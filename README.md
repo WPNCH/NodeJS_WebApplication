@@ -4,7 +4,7 @@ ___Demonstration of  API Interface Between Nodejs Web Application and MSSQL Data
 __Simple Web Application Connected to MSSQL Database__
 - Everything Starts at app.js, the first page is login page
 - Every Routing refer to route.js
-- Authenticate Middleware storeed into cookies to check user permission
+- Authenticate Middleware stored into cookies to check user permission
 - Users information stored as SQL database and required for login
 - Javascript to run screen loading features, control element properties (Simple of UX/UI design)
 - using EJS as view to display dynamic html tables according to queried data 
