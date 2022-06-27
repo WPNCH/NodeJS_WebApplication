@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+
+
+
+<div class="container">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+   
+    <a class="nav-link text-light text-uppercase font-weight-bold px-3" ></a>
+    <a class="nav-link text-light text-uppercase font-weight-bold px-3"
+        href="/sql" ><u>HOME</u></a>
+   
+    <h2>Upload File</h2>
+ 
+    <form class="form-horizontal" method="post" action="/uploadfile" enctype="multipart/form-data">
+        <input id ="uploadfile" type="file" name="uploadfile" accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' >
+        <input type="submit" id = 'submit1' value="Preview" hidden>
+    </form>
+
+    <form class="form-horizontal" method="get" action="/sql" >
+        <input type="submit" id = 'submit2' value="back" hidden>
+    </form>
+    <!-- Trigger the modal with a button and Preview-->
+    <button type="button" class="btn btn-info btn-lg"  onclick="openmodal();">
+    Preview
+    </button>
+
+    <!--Table Show FileName Record-->
+    <table class="table table-bordered" border="2" cellpadding="5" cellspacing="5" align="center">
+      <thead>
+          <tr align="Center">
+
+              <th >FileName</th>
+              <th >UploadedBy</th>
+              <th >DataDate</th>
+              <th >ImportDate</th>
+   
+          </tr>
+  </thead>
+  <tbody align="center">
+      <% Object.values(Jdata.recordset).forEach(function(item){%>
+      <tr>
+          <td><%= item.Filepath%></td>
+          <td><%= item.UploadedBy%></td>
+          <td><%= item.DataDate%></td>
+          <td><%= item.ImportDate%></td>
+      </tr>            
+      <%})%>
+  </tbody>
+  </table>
+
+    <!-- hiddenmodal -->
+  <input id ='hiddenmodal' name ='hiddenmodal' type="text" value="<%=modalstatus%>" hidden>
+  <input id ='impstatusvalue' name ='impstatusvalue' type="text" value="<%=importstatus%>" hidden>
+
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" tabindex="-1" id="myModal" role="dialog">
+    <div class="modal-dialog fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <% if(importstatus == 'y'){%>
+            <div class="alert alert-success" role="alert">
+              <strong>อัพโหลดสำเร็จ</strong>
+            </div>
+            <%}%>
+            <% if(importstatus == 'n'){%>
+              <div class="alert alert-danger" role="alert">
+                <strong>อัพโหลดไม่สำเร็จกรุณาตรวจสอบไฟล์อีกครั้ง</strong>
+              </div>
+              <%}%>  
+          <h4 class="modal-title">Upload</h4>
+          <p>Date <input style="background-color: #d1d1d1;" id = "datadate" name = "datadate" type="text" value = "<%= stampdate%>" onkeyup="correctsenddate()" readonly>
+            <button type="button" class="btn btn-info"  onclick="editdate();">
+              Edit
+              </button></p>
+        </div>
+
+        <div class="modal-body">
+            <div class="modal-split">
+          <p>Open&nbsp;Order</p>
+          <table class="table table-condensed" border="1" cellpadding="1" cellspacing="1" align="center">
+            <thead>
+                <tr align="left">
+                    <th>WIP</th>
+                    <th>Promised</th>
+                    <th>Customer</th>
+                    <th>VIN</th>
+                    <th>SA</th>
+                    <th>CO</th>
+                    <th>CI</th>
+                    <th>NotInvoiced</th>
+                    <th>Parts</th>
+                    <th>Route</th>
+                    <th>NotInvoiced</th>
+                    <th>Labour</th>
+                    <th>NotInvoiced</th>
+                    <th>Total</th>
+                    <th>Sta</th>
+                    <th>JobType</th>
+                    <th>OrdDate</th>
+                    <th>JobStart</th>
+                    <th>JobFinish</th>
+                    <th>Registration</th>
+                    <th>Roof</th>
+                    <th>Check-in</th>
+
+                </tr>
+          </thead>
+          <tbody align="left">
+            <% Object.values(sheet1).forEach(function(item){%>
+            <tr>
+                <td><%= item[0]%></td>
+                <td><%= item[1]%></td>
+                <td><%= item[2]%></td>
+                <td><%= item[3]%></td>
+                <td><%= item[4]%></td>
+                <td><%= item[5]%></td>
+                <td><%= item[6]%></td>
+                <td><%= item[7]%></td>
+                <td><%= item[8]%></td>
+                <td><%= item[9]%></td>
+                <td><%= item[10]%></td>
+                <td><%= item[11]%></td>
+                <td><%= item[12]%></td>
+                <td><%= item[13]%></td>
+                <td><%= item[14]%></td>
+                <td><%= item[15]%></td>
+                <td><%= item[16]%></td>
+                <td><%= item[17]%></td>
+                <td><%= item[18]%></td>
+                <td><%= item[19]%></td>
+                <td><%= item[20]%></td>
+                <td><%= item[21]%></td>
+                
+            </tr>    
+            <%})%>
+          </tbody>  
+          </table>
+            </div> 
+
+            <div class="modal-split">
+            <p>Analysis</p>
+            <table class="table table-condensed" border="1" cellpadding="5" cellspacing="5" align="center">
+              <thead>
+                  <tr align="left">
+                    <th>F</th>
+                    <th>WIPNO</th>
+                    <th> Ln</th>
+                    <th>S</th>
+                    <th>RTS Code</th>
+                    <th>BM</th>
+                    <th>Description</th>
+                    <th>T</th>
+                    <th>Allowed</th>
+                    <th>Tech</th>
+                    <th>  Taken</th>
+                    <th>Unit Pr.</th>
+                    <th>D</th>
+                    <th>Unit Cos</th>
+                    <th> Invoice</th>
+                    <th>Inv. Date</th>
+                    <th>Disc</th>
+                    <th>Total Price</th>
+                    <th>Account</th>
+                    <th>License</th>
+                    <th>Chassis</th>
+                    <th>SA</th>
+                    <th>E-S</th>
+                    <th>W-In date</th>
+                    <th>L</th>
+                    <th>Customer</th>
+                  </tr>
+            </thead>
+            <tbody align="left">
+              <% Object.values(sheet2).forEach(function(item){%>
+              <tr>
+                <td><%= item[0]%></td>
+                <td><%= item[1]%></td>
+                <td><%= item[2]%></td>
+                <td><%= item[3]%></td>
+                <td><%= item[4]%></td>
+                <td><%= item[5]%></td>
+                <td><%= item[6]%></td>
+                <td><%= item[7]%></td>
+                <td><%= item[8]%></td>
+                <td><%= item[9]%></td>
+                <td><%= item[10]%></td>
+                <td><%= item[11]%></td>
+                <td><%= item[12]%></td>
+                <td><%= item[13]%></td>
+                <td><%= item[14]%></td>
+                <td><%= item[15]%></td>
+                <td><%= item[16]%></td>
+                <td><%= item[17]%></td>
+                <td><%= item[18]%></td>
+                <td><%= item[19]%></td>
+                <td><%= item[20]%></td>
+                <td><%= item[21]%></td>
+                <td><%= item[22]%></td>
+                <td><%= item[23]%></td>
+                <td><%= item[24]%></td>
+                <td><%= item[25]%></td>
+                
+              </tr>    
+              <%})%>
+            </tbody>  
+            </table>
+            </div>
+
+            <div class="modal-split">
+            <p>AS</p>
+              <table class="table table-condensed" border="1" cellpadding="5" cellspacing="5" align="center">
+                <thead>
+                    <tr align="left">
+                        <th>WIP</th>
+                        <th>INVNo</th>
+                        <th>Postdate</th>
+                        <th>SA</th>
+                        <th>T</th>
+                        <th>VIN</th>
+                        <th>Account</th>
+                        <th>Customer</th>
+                        <th>D</th>
+                        <th>SaleType</th>
+                        <th>Net</th>
+                        <th>VAT</th>
+                        <th>FRU</th>
+                        <th>UsedFRU</th>
+                        <th>LaborAmt</th>
+                        <th>Laborcost</th>
+                        <th>BodyAmt</th>
+                        <th>BodyCost</th>
+                        <th>Partsale</th>
+                        <th>Partcost</th>
+                        <th>SubContAmt</th>
+                        <th>SubContCost</th>
+                        <th>JobNo</th>
+
+                    </tr>
+              </thead>
+              <tbody align="left">
+                <% Object.values(sheet3).forEach(function(item){%>
+                <tr>
+                    <td><%= item[0]%></td>
+                    <td><%= item[1]%></td>
+                    <td><%= item[2]%></td>
+                    <td><%= item[3]%></td>
+                    <td><%= item[4]%></td>
+                    <td><%= item[5]%></td>
+                    <td><%= item[6]%></td>
+                    <td><%= item[7]%></td>
+                    <td><%= item[8]%></td>
+                    <td><%= item[9]%></td>
+                    <td><%= item[10]%></td>
+                    <td><%= item[11]%></td>
+                    <td><%= item[12]%></td>
+                    <td><%= item[13]%></td>
+                    <td><%= item[14]%></td>
+                    <td><%= item[15]%></td>
+                    <td><%= item[16]%></td>
+                    <td><%= item[17]%></td>
+                    <td><%= item[18]%></td>
+                    <td><%= item[19]%></td>
+                    <td><%= item[20]%></td>
+                    <td><%= item[21]%></td>
+                    <td><%= item[22]%></td>
+                    
+                </tr>    
+                <%})%>
+              </tbody>  
+              </table>
+            </div>
+              
+            <div class="modal-split">
+                <p>CheckIn</p>
+                <table class="table table-condensed" border="1" cellpadding="5" cellspacing="5" align="center">
+                  <thead>
+                      <tr align="Center">
+                        <th>Seq.</th>
+                        <th>WIP No</th>
+                        <th>D</th>
+                        <th>Check in</th>
+                        <th>Promised</th>
+                        <th>Customer name</th>
+                        <th>Registration</th>
+                        <th>Make/model</th>
+                        <th>Phone</th>
+                        <th>SA</th>
+                        <th>Chassis</th>
+                        <th>Roof</th>
+                        <th>Date IN</th>
+                        <th>FRU</th>
+                        <th>Parts Amount</th>
+                        <th>SubContract</th>
+                        <th>Account</th>
+                        <th>Service text</th>
+                        
+                        
+                      </tr>
+                </thead>
+                <tbody align="left">
+                  <% Object.values(sheet4).forEach(function(item){%>
+                  <tr>
+                    <td><%= item[0]%></td>
+                    <td><%= item[1]%></td>
+                    <td><%= item[2]%></td>
+                    <td><%= item[3]%></td>
+                    <td><%= item[4]%></td>
+                    <td><%= item[5]%></td>
+                    <td><%= item[6]%></td>
+                    <td><%= item[7]%></td>
+                    <td><%= item[8]%></td>
+                    <td><%= item[9]%></td>
+                    <td><%= item[10]%></td>
+                    <td><%= item[11]%></td>
+                    <td><%= item[12]%></td>
+                    <td><%= item[13]%></td>
+                    <td><%= item[14]%></td>
+                    <td><%= item[15]%></td>
+                    <td><%= item[16]%></td>
+                    <td><%= item[17]%></td>
+                    
+                  </tr>    
+                  <%})%>
+                </tbody>  
+                </table>
+            </div>
+
+            <div class="modal-split">
+                <p>CheckOut</p>
+                    <table class="table table-condensed" border="1" cellpadding="5" cellspacing="5" align="center">
+                      <thead>
+                          <tr align="left">
+                            <th>Seq.</th>
+                            <th>WIP No</th>
+                            <th>D</th>
+                            <th>Check out</th>
+                            <th>Customer name</th>
+                            <th>Registration</th>
+                            <th>Make/model</th>
+                            <th>Phone</th>
+                            <th>SA</th>
+                            <th>Chassis number</th>
+                            <th>Roof</th>
+                            <th>Cashier</th>
+                            
+                          </tr>
+                    </thead>
+                    <tbody align="left">
+                      <% Object.values(sheet5).forEach(function(item){%>
+                      <tr>
+                        <td><%= item[0]%></td>
+                        <td><%= item[1]%></td>
+                        <td><%= item[2]%></td>
+                        <td><%= item[3]%></td>
+                        <td><%= item[4]%></td>
+                        <td><%= item[5]%></td>
+                        <td><%= item[6]%></td>
+                        <td><%= item[7]%></td>
+                        <td><%= item[8]%></td>
+                        <td><%= item[9]%></td>
+                        <td><%= item[10]%></td>
+                        <td><%= item[11]%></td>
+                        
+                      </tr>    
+                      <%})%>
+                    </tbody>  
+                    </table>
+            </div>
+
+            <div class="modal-split">
+                <p>Quotation</p>
+                <table class="table table-condensed" border="1" cellpadding="5" cellspacing="5" align="center">
+                  <thead>
+                      <tr align="left">
+                        <th>WIP</th>
+                        <th>Promised</th>
+                        <th>Customer</th>
+                        <th>VIN</th>
+                        <th>SA</th>
+                        <th>Parts</th>
+                        <th>Route</th>
+                        <th>Labour</th>
+                        <th>Total</th>
+                        <th>JobType</th>
+                        <th>OrdDate</th>
+                        <th>Customerorderno</th>
+                        
+                      </tr>
+                </thead>
+                <tbody align="left">
+                  <% Object.values(sheet6).forEach(function(item){%>
+                  <tr>
+                    <td><%= item[0]%></td>
+                    <td><%= item[1]%></td>
+                    <td><%= item[2]%></td>
+                    <td><%= item[3]%></td>
+                    <td><%= item[4]%></td>
+                    <td><%= item[5]%></td>
+                    <td><%= item[6]%></td>
+                    <td><%= item[7]%></td>
+                    <td><%= item[8]%></td>
+                    <td><%= item[9]%></td>
+                    <td><%= item[10]%></td>
+                    <td><%= item[11]%></td>
+                    
+                  </tr>    
+                  <%})%>
+                </tbody>  
+                </table>
+            </div>
+        </div>
+
+            <div class="modal-footer">
+            <form class="form-horizontal" method="post" action = '/importfile'>
+              <input id = datadate2send name = 'datadate2send' type = 'text' value= "<%= stampdate%>" hidden>
+      
+                <input id ='filename' name ='filename' type="text" value="<%=filename%>" hidden>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            </form>
+            </div>
+                    
+
+        
+
+    </div>
+</div>
+ 
+
+<div id = 'loading' style="display: block"></div>
+
+<style>
+.fullscreen {
+	margin: 0;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.table-condensed{
+  font-size: 8px;
+}
+
+.modal-dialog{
+      overflow-y: initial !important
+}
+.modal-body{
+  height: 500px;
+  overflow-y: auto;
+}
+
+
+
+#loading {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(192, 192, 192, 0.5);
+  background-image: url("https://i.stack.imgur.com/MnyxU.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+</style>
+
+<script>
+  function editdate(){
+    $('#datadate').removeAttr("readonly")
+    $('#datadate').removeAttr("style")
+  }
+
+  function correctsenddate(){
+    var stampdate = $('#datadate').val()
+      $('#datadate2send').val(stampdate)
+
+  }
+
+  function openmodal() {
+    var uploadedfilename = $("#uploadfile").val()
+    if( uploadedfilename != ''){
+
+    $('#submit1').trigger('click')
+
+    }else{
+      setVisible('#loading', false);
+     $("#myModal").modal("show");
+      
+    }
+  }
+
+
+
+function setVisible(selector, visible) {
+  document.querySelector(selector).style.display = visible ? 'block' : 'none';
+}
+
+
+
+  $(document).ready(function(){
+    var str1 = $("#hiddenmodal").val()
+    var impstatus = $("#impstatusvalue").val()
+    
+    if (str1 == 'openmodal'){
+    // Show the Modal on load
+    $("#myModal").modal("show");
+    prep_modal();
+    }
+
+    if (impstatus != ''){
+      setVisible('#loading', false);
+    $("#myModal").modal("show");
+    }
+    
+
+  });
+    function prep_modal() {
+  $(".modal").each(function() {
+
+  var element = this;
+	var pages = $(this).find('.modal-split');
+
+  if (pages.length != 0)
+  {
+    	pages.hide();
+    	pages.eq(0).show();
+
+    	var b_button = document.createElement("button");
+                b_button.setAttribute("type","button");
+          			b_button.setAttribute("class","btn btn-primary");
+          			b_button.setAttribute("style","display: none;");
+          			b_button.innerHTML = "Back";
+
+    	var n_button = document.createElement("button");
+                n_button.setAttribute("type","button");
+          			n_button.setAttribute("class","btn btn-primary");
+          			n_button.innerHTML = "Next";
+
+    	$(this).find('.modal-footer').append(b_button).append(n_button);
+
+
+    	var page_track = 0;
+
+    	$(n_button).click(function() {
+        
+        this.blur();
+
+    		if(page_track == 0)
+    		{
+    			$(b_button).show();
+    		}
+
+    		if(page_track == pages.length-2)
+    		{
+    			$(n_button).text("Submit");
+    		}
+
+        if(page_track == pages.length-1)
+        {
+          $(element).find("form").submit();
+        }
+
+    		if(page_track < pages.length-1)
+    		{
+    			page_track++;
+
+    			pages.hide();
+    			pages.eq(page_track).show();
+    		}
+
+
+    	});
+
+    	$(b_button).click(function() {
+
+    		if(page_track == 1)
+    		{
+    			$(b_button).hide();
+    		}
+
+    		if(page_track == pages.length-1)
+    		{
+    			$(n_button).text("Next");
+    		}
+
+    		if(page_track > 0)
+    		{
+    			page_track--;
+
+    			pages.hide();
+    			pages.eq(page_track).show();
+    		}
+
+
+    	});
+
+  }
+
+  });
+}
+
+
+
+  $(document).on('hide.bs.modal','#myModal', function () {
+                setVisible('#loading', true);
+                $("#hiddenmodal").val('')
+                $("#impstatusvalue").val('')
+                $('#submit2').trigger('click');
+                
+ //Do stuff here
+  });
+  </script>
+
+</body>
+
+</html>

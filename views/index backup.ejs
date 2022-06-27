@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello ejs</h1>
+    <%= data%>
+    <%= age%>
+    <hr>
+    <% if(age>18){%> 
+        <h1>Passed</h1> 
+    <%} else {%>
+        <h1>Not Passed</h1>
+    <% }%>
+    <hr>
+    <% for(i=1;i<10;i++) { %> 
+        <h1><%=i%></h1>
+     <%}%>   
+    <hr>
+    <ol>
+    <% for(index in prod) { %> 
+        <li><%= prod[index]%></li>
+
+     <%}%>   
+    </ol>
+    
+
+
+    
+</body>
+</html>

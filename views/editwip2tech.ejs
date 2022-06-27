@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ระบบจัดการ WIP</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <img src="images/home/BMWIcon.png" width="80" height="80">
+              <img src="images/home/MINIIcon.png" width="140" height="60"></a>
+        <div class="container-fluid">	    
+          <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto order-0 ">
+              <li class="nav-item">
+                <a class="nav-link text-light text-uppercase font-weight-bold px-3"
+                  href="" >EDIT WIP</a>
+              </li>
+
+            </ul>
+
+           
+            <form class="d-flex ms-auto order-5" method="get" action="/wip2tech">
+                <button type="submit" class="btn btn-primary">BACK</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container">
+    <form class="form-horizontal" method="post" action="/updatewip2tech">
+        <div class="form-group">
+          <label class="control-label col-sm-2">WIP</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="WIP" value= "<%= data.WIP%>" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Brand</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="Brand" value= "<%= data.Brand%>" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Department</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="D" value= "<%= data.D%>" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Branch</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="Branch" value= "<%= data.Branch%>" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">OriginalTech</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="OriginalTech" value= "<%= data.OriginalTech%>" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2">NewTech</label>
+          <div class="col-sm-10">
+            <!-- <input type="text" class="form-control" name="Tech" value= "<%= data.Tech%>"> -->
+            <select id="NewTech" name="NewTech" class="form-control">
+              <option value="" selected hidden>Select Tech</option>
+              <option value="BL000">BL000</option>
+              <option value="SUB000">SUB000</option>
+              <option value="HR1001">HR1001</option>
+            </select>
+          </div>
+        </div>
+        
+        
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+      </div class="container">
+</body>
+</html>
+
+
+

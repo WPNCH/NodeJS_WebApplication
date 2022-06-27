@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ระบบจัดการ WIP</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <img src="images/home/BMWIcon.png" width="80" height="80">
+              <img src="images/home/MINIIcon.png" width="140" height="60"></a>
+              <a class="nav-link text-light text-uppercase font-weight-bold px-3" ></a>
+              <a class="nav-link text-light text-uppercase font-weight-bold px-3"
+                  href="/wip2tech" ><u>WIP&nbsp;TECH&nbsp;EDIT</u></a>
+              <a class="nav-link text-light text-uppercase font-weight-bold px-3"
+                  href="/previewimport" ><u>Upload&nbsp;File</u></a>    
+              <a class="nav-link text-light text-uppercase font-weight-bold px-3"
+                  href="/createuserform" ><u>CREATE&nbsp;USER</u></a>
+                  <a class="nav-link text-light text-uppercase font-weight-bold px-3"
+                  href="https://app.powerbi.com/reportEmbed?reportId=3d0c321b-3b28-475a-b61d-8757890dcc2c&autoAuth=true&ctid=6345207c-7bd2-49f1-920e-a5aa88e4c1c0&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1iLXByaW1hcnktcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" >
+                  <u>BI&nbsp;Report</u></a>
+        <div class="container-fluid">	    
+          <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto order-0 ">
+              <li class="nav-item">
+                <a class="nav-link text-light text-uppercase font-weight-bold px-3"
+                  href="" ></a>
+              </li>
+
+            </ul>
+
+            <form class="d-flex ms-auto order-5" method="get" action="/logout">
+            
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+    <div class="container">
+      <h2> </h2>
+      <h2 align="Center">ตารางแก้ไข WIP</h2>
+      <h1> </h1>
+    <table class="table table-bordered" border="2" cellpadding="5" cellspacing="5" align="center">
+        <thead>
+            <tr align="Center">
+
+                <th >WIP</th>
+                <th >Brand</th>
+                <th >Tech</th>
+                <th >Department</th>
+                <th >EDIT</th>
+            </tr>
+    </thead>
+    <tbody align="center">
+        <% Object.values(Jdata.recordset).forEach(function(item){%>
+        <tr>
+            <td><%= item.WIP%></td>
+            <td><%= item.Brand%></td>
+            <td><%= item.Tech%></td>
+            <td><%= item.D%></td>
+            <td>
+                <form action="/edit" method="POST">
+                    <input type ='hidden' name = 'edit_WIP', value ='<%=item.WIP %>'>
+                    <input type ='hidden' name = 'edit_Brand', value ='<%=item.Brand %>'>
+                    <input type ='hidden' name = 'edit_Tech', value ='<%=item.Tech %>'>
+                    <input type ='hidden' name = 'edit_Department', value ='<%=item.D %>'>
+                    <button type="Submit" class ='btn btn-primary'>EDIT</button>
+                </form>
+            </td>
+        </tr>            
+        <%})%>
+    </tbody>
+    </table>
+    </div>
+
+</body>
+</html>
