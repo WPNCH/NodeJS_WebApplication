@@ -1,7 +1,7 @@
 var mssql = require('mssql');
 var sql = mssql.connect({
   user: 'temp',    
-  password: 'P@ssw0rdtemp',   
+  password: 'password',   
   server: 'localhost',
   database: 'TestEnvironment',
   options: {
