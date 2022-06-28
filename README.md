@@ -13,3 +13,7 @@ __Highlight__
 - Excel Import Function directly connects and sends data to SQL
 - Preview Feature to preview data in Excel before import using Multer package
 - Real Application deployed on IIS that using URL Rewriter to reverse proxy into application port and run PM2 as a service(Web.config detail)
+
+_Preview Feature_
+
+![alt text](https://github.com/WPNCH/BI-Analytic-Dashboard/blob/main/Pic/Webapp1.PNG)
